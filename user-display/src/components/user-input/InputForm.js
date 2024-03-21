@@ -14,6 +14,16 @@ export default function InputForm(props) {
 
   const userSubmitHandler = (event) => {
     event.preventDefault();
+    if (userName.trim().length === 0) {
+      props.sendErrorToApp("nameError");
+      setUserName("");
+      return;
+    }
+    if (userAge <= 0) {
+      props.sendErrorToApp("ageError");
+      setUserAge("");
+      return;
+    }
     const id = Math.random().toString();
     const userDetails = {
       userName: userName,
