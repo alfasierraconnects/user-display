@@ -33,24 +33,31 @@ export default function InputForm(props) {
           onSubmit={userSubmitHandler}
           className="flex flex-col rounded-2xl shadow-lg bg-white p-4 gap-2 m-10"
         >
-          <label className="font-bold">UserName</label>
+          <label className="font-bold" htmlFor="userName">
+            UserName
+          </label>
           <input
             onChange={userNameChangeHandler}
             className="border-2"
+            id="userName"
             type="text"
             value={userName}
             required
+            autoComplete="off"
           ></input>
-          <label className="font-bold">Age (In Years)</label>
+          <label className="font-bold" htmlFor="userAge">
+            Age (In Years)
+          </label>
           <input
+            value={userAge}
             onChange={userAgeChangeHandler}
             className="border-2"
             type="number"
-            value={userAge}
+            id="userAge"
             required
           ></input>
           <button
-            className="text-white bg-purple-950 text-lg p-1 rounded-md"
+            className="text-white bg-purple-950 text-lg p-1 rounded-md hover:shadow-lg hover:shadow-purple-500/40 active:opacity-85 active:shadow-none"
             type="submit"
           >
             Add User
