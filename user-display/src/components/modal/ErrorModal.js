@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-const Backdrop = (props) => {
+const Backdrop = () => {
   return <div className="fixed inset-0 bg-black opacity-50 z-50"></div>;
 };
 
@@ -28,6 +28,8 @@ export default function ErrorModal(props) {
   function errorText() {
     if (props.errorType === "nameError")
       return "Error in reading Name. Please enter a valid name.";
+    else if (props.errorType === "collegeError")
+      return "Error in reading college name. Please enter a valid college name.";
     else return "Error in Age. Please enter a number more than 0.";
   }
 

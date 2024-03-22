@@ -5,6 +5,7 @@ export default function InputForm(props) {
   // const [userAge, setUserAge] = useState("");
   const userName = useRef();
   const userAge = useRef();
+  const userCollege = useRef();
 
   // const userNameChangeHandler = (event) => {
   //   setUserName(event.target.value);
@@ -20,6 +21,10 @@ export default function InputForm(props) {
       props.sendErrorToApp("nameError");
       return;
     }
+    if (userCollege.current.value.trim().length === 0) {
+      props.sendErrorToApp("collegeError");
+      return;
+    }
     if (userAge.current.value <= 0) {
       props.sendErrorToApp("ageError");
       return;
@@ -28,12 +33,14 @@ export default function InputForm(props) {
     const userDetails = {
       userName: userName.current.value,
       userAge: userAge.current.value,
+      userCollege: userCollege.current.value,
       key: id,
       id: id,
     };
     props.sendDataToApp(userDetails);
     userName.current.value = "";
     userAge.current.value = "";
+    userCollege.current.value = "";
   };
 
   return (
@@ -55,6 +62,17 @@ export default function InputForm(props) {
             required
             autoComplete="off"
             ref={userName}
+          ></input>
+          <label className="font-bold" htmlFor="userCollege">
+            College
+          </label>
+          <input
+            className="border-2"
+            id="userCollege"
+            type="text"
+            required
+            autoComplete="off"
+            ref={userCollege}
           ></input>
           <label className="font-bold" htmlFor="userAge">
             Age (In Years)

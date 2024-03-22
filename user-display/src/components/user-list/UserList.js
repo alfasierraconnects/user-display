@@ -8,6 +8,7 @@ export default function UserList(props) {
         return (
           <UserItem
             name={item.userName}
+            college={item.userCollege}
             age={item.userAge}
             key={item.id}
             id={item.id}
