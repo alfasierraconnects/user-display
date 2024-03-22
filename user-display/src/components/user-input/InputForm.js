@@ -1,39 +1,39 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 
 export default function InputForm(props) {
-  const [userName, setUserName] = useState("");
-  const [userAge, setUserAge] = useState("");
+  // const [userName, setUserName] = useState("");
+  // const [userAge, setUserAge] = useState("");
+  const userName = useRef();
+  const userAge = useRef();
 
-  const userNameChangeHandler = (event) => {
-    setUserName(event.target.value);
-  };
+  // const userNameChangeHandler = (event) => {
+  //   setUserName(event.target.value);
+  // };
 
-  const userAgeChangeHandler = (event) => {
-    setUserAge(event.target.value);
-  };
+  // const userAgeChangeHandler = (event) => {
+  //   setUserAge(event.target.value);
+  // };
 
   const userSubmitHandler = (event) => {
     event.preventDefault();
-    if (userName.trim().length === 0) {
+    if (userName.current.value.trim().length === 0) {
       props.sendErrorToApp("nameError");
-      setUserName("");
       return;
     }
-    if (userAge <= 0) {
+    if (userAge.current.value <= 0) {
       props.sendErrorToApp("ageError");
-      setUserAge("");
       return;
     }
     const id = Math.random().toString();
     const userDetails = {
-      userName: userName,
-      userAge: userAge,
+      userName: userName.current.value,
+      userAge: userAge.current.value,
       key: id,
       id: id,
     };
     props.sendDataToApp(userDetails);
-    setUserName("");
-    setUserAge("");
+    userName.current.value = "";
+    userAge.current.value = "";
   };
 
   return (
@@ -47,24 +47,26 @@ export default function InputForm(props) {
             UserName
           </label>
           <input
-            onChange={userNameChangeHandler}
+            // onChange={userNameChangeHandler}
             className="border-2"
             id="userName"
             type="text"
-            value={userName}
+            // value={userName}
             required
             autoComplete="off"
+            ref={userName}
           ></input>
           <label className="font-bold" htmlFor="userAge">
             Age (In Years)
           </label>
           <input
-            value={userAge}
-            onChange={userAgeChangeHandler}
+            // value={userAge}
+            // onChange={userAgeChangeHandler}
             className="border-2"
             type="number"
             id="userAge"
             required
+            ref={userAge}
           ></input>
           <button
             className="text-white bg-purple-950 text-lg p-1 rounded-md hover:shadow-lg hover:shadow-purple-500/40 active:opacity-85 active:shadow-none"
